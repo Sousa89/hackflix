@@ -22,22 +22,25 @@ function MovieInfo(props) {
   const [details, setDetails] = useState({});
 
   // define a side effect which wil fetch data about the movie after the component has first rendered
-  useEffect(function () {
-    // use axios to make a request to the movie id endpoint
-    axios({
-      url: `https://api.themoviedb.org/3/movie/${movie_id}`,
-      params: {
-        api_key: "80b3efd6913b7c0573391241f786ea80",
-        include_adult: false,
-      },
-    }).then(function (movieInfo) {
-      console.log(movieInfo);
+  useEffect(
+    function () {
+      // use axios to make a request to the movie id endpoint
+      axios({
+        url: `https://api.themoviedb.org/3/movie/${movie_id}`,
+        params: {
+          api_key: "80b3efd6913b7c0573391241f786ea80",
+          include_adult: false,
+        },
+      }).then(function (movieInfo) {
+        console.log(movieInfo);
 
-      //use the API data and update started
-      setDetails(movieInfo.data);
-    });
-    // specify that this side effect should only one time after the component has first rendered
-  }, []);
+        //use the API data and update started
+        setDetails(movieInfo.data);
+      });
+      // specify that this side effect should only one time after the component has first rendered
+    },
+    [movie_id]
+  );
   return (
     <section className="poster">
       <div className="description">
